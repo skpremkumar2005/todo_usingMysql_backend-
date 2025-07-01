@@ -1,17 +1,18 @@
 const express=require('express');
-const mysql = require('mysql2');
+const dotenv = require('dotenv');
+dotenv.config();
 const app=express();
+const mysql = require('mysql2');
 app.use(express.json());
 
 
 const db = mysql.createConnection({
-    host: 'localhost',
-    port: 3306,
-    user: 'root',
-    password: 'Prem@1234',
-    database: 'todo'
-
-});
+    host: process.env.HOST,
+    port: process.env.PORT,
+    user: process.env.USER,
+    password: process.env.PASSWORD,
+    database: process.env.DATABASE
+  });
 app.get('/',(req,res)=>{
     res.json({message:"hello from port 3000"});
 })
